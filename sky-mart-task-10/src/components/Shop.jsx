@@ -4,6 +4,9 @@ import axios from "axios";
 
 const Shop = () => {
   const [productsData, setProductsData] = useState([]);
+  const [cartItem, setCartItem] = useState([])
+  console.log(cartItem);
+  
 
   const getProductsData = async () => {
     try {
@@ -23,7 +26,7 @@ const Shop = () => {
     // Example API array mapping
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
       {productsData.map((item) => (
-        <ProductCard key={item.id} product={item} />
+        <ProductCard key={item.id} product={item} setCartItem={setCartItem} cartItem={cartItem}/>
       ))}
     </div>
   );

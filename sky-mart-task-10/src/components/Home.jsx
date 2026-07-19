@@ -13,7 +13,9 @@ import {
   Home as HomeIcon, 
   Dumbbell, 
   Watch,
-  Star
+  Star,
+  Milk,
+  Hourglass
 } from 'lucide-react';
 
 const SkyMartHome = () => {
@@ -26,12 +28,10 @@ const SkyMartHome = () => {
   ];
 
   const categories = [
-    { id: 1, name: "electronics", icon: Monitor, count: 17, bg: "bg-blue-50 text-blue-600 border-blue-100" },
-    { id: 2, name: "clothing", icon: Shirt, count: 2, bg: "bg-orange-50 text-orange-600 border-orange-100" },
-    { id: 3, name: "furniture", icon: Armchair, count: 3, bg: "bg-purple-50 text-purple-600 border-purple-100" },
-    { id: 4, name: "home", icon: HomeIcon, count: 14, bg: "bg-emerald-50 text-emerald-600 border-emerald-100" },
-    { id: 5, name: "sports", icon: Dumbbell, count: 8, bg: "bg-rose-50 text-rose-600 border-rose-100" },
-    { id: 6, name: "accessories", icon: Watch, count: 6, bg: "bg-amber-50 text-amber-600 border-amber-100" }
+    { id: 1, name: "groceries", icon: ShoppingBag, count: 5, bg: "bg-blue-50 text-blue-600 border-blue-100" },
+    { id: 2, name: "fragrances", icon: Milk, count: 5, bg: "bg-orange-50 text-orange-600 border-orange-100" },
+    { id: 3, name: "furniture", icon: Armchair, count: 5, bg: "bg-purple-50 text-purple-600 border-purple-100" },
+    { id: 4, name: "beauty", icon: Hourglass, count: 15, bg: "bg-emerald-50 text-emerald-600 border-emerald-100" },
   ];
 
   const topRated = [
