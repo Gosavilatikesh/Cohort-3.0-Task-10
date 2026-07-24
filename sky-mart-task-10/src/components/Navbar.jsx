@@ -38,7 +38,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/shop"
+            to="/main/shop"
             className={({ isActive }) =>
               isActive
                 ? "text-orange-500 font-semibold"
@@ -49,7 +49,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/about"
+            to="/main/about"
             className={({ isActive }) =>
               isActive
                 ? "text-orange-500 font-semibold"
