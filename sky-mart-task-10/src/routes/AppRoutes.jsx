@@ -9,6 +9,7 @@ import PublicRoutes from "./PublicRoute";
 import Shop from "../pages/Shop";
 import About from "../pages/About";
 import Home from "../pages/Home";
+import ProductDetails from "../pages/ProductDetails";
 
 const AppRoutes = () => {
   let router = createBrowserRouter([
@@ -34,29 +35,21 @@ const AppRoutes = () => {
       ],
     },
     {
-      path: "/main",
-      element: <ProtectedRoutes />,
+  path: "/main",
+  element: <ProtectedRoutes />,
+  children: [
+    {
+      path: "",
+      element: <MainLayout />,
       children: [
-        {
-          path: "",
-          element: <MainLayout />,
-          children:[
-            {
-              path:"",
-              element: <Home />
-            },
-            {
-              path:"shop",
-              element: <Shop />
-            },
-            {
-              path:"about",
-              element: <About />
-            }
-          ]
-        },
+        { path: "", element: <Home /> },
+        { path: "shop", element: <Shop /> },
+        { path: "shop/:id", element: <ProductDetails /> }, // <-- ADD THIS LINE
+        { path: "about", element: <About /> },
       ],
     },
+  ],
+}
   ]);
 
   return <RouterProvider router={router} />;

@@ -17,8 +17,11 @@ import {
   Milk,
   Hourglass
 } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 const SkyMartHome = () => {
+
+  const navigate = useNavigate()
   // Mock Data mapped directly from your application footprint
   const stats = [
     { label: "Products Available", value: "20+" },
@@ -76,10 +79,10 @@ const SkyMartHome = () => {
             </div>
 
             <div className="pt-8 flex flex-wrap gap-4">
-              <button className="bg-slate-900 text-white hover:bg-slate-800 transition-all px-6 py-3.5 rounded-xl font-medium text-sm inline-flex items-center gap-2 shadow-md shadow-slate-900/10">
+              <button onClick={() => navigate("/main/shop")} className="bg-slate-900 text-white hover:bg-slate-800 transition-all px-6 py-3.5 rounded-xl font-medium text-sm inline-flex items-center gap-2 shadow-md shadow-slate-900/10">
                 Shop Now <ArrowRight size={16} />
               </button>
-              <button className="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all px-6 py-3.5 rounded-xl font-medium text-sm">
+              <button onClick={() => navigate("/main/shop")} className="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all px-6 py-3.5 rounded-xl font-medium text-sm">
                 View All Products
               </button>
             </div>

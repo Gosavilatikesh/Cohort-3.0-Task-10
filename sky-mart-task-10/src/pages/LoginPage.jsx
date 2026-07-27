@@ -23,43 +23,48 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
-  const {registeredUsers, logedInUser, setLogedInUser} = useContext(Auth)
+  const { registeredUsers, logedInUser, setLogedInUser } = useContext(Auth);
 
-let {register, handleSubmit, reset, formState:{errors}} = useForm()
+  let {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const formSubmit = (data) => {
     console.log(data);
 
     let user = registeredUsers.find((val) => {
-        return val.email === data.email && val.password === data.password
-    })
+      return val.email === data.email && val.password === data.password;
+    });
 
-    if(!user){
-        toast.error("Invaild credentials")
-        reset()
-        return;
+    if (!user) {
+      toast.error("Invaild credentials");
+      reset();
+      return;
     }
 
-    setLogedInUser(user)
+    setLogedInUser(user);
 
-    localStorage.setItem('logedInUser', JSON.stringify(user))
-    toast.success("User Logged In")
-    navigate("/main")
-    reset()
-
+    localStorage.setItem("logedInUser", JSON.stringify(user));
+    toast.success("User Logged In");
+    navigate("/main");
+    reset();
   };
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
-      <div className="w-full max-w-5xl bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
-        
+      <div
+        className="w-full max-w-5xl bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-
+      h-160"
+      >
         {/* ==========================================================================
            LEFT COLUMN: FORM WORKSPACE
            ========================================================================== */}
         <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
-          
           {/* Brand Header */}
           <div>
             <div className="flex items-center justify-between">
@@ -94,8 +99,10 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
             </div>
 
             {/* Form Execution */}
-            <form onSubmit={handleSubmit(formSubmit)} className="mt-8 space-y-5">
-              
+            <form
+              onSubmit={handleSubmit(formSubmit)}
+              className="mt-8 space-y-5"
+            >
               {/* Email Input Field */}
               <div className="space-y-1.5">
                 <label className="text-xs font-extrabold text-slate-700 tracking-wider uppercase">
@@ -106,14 +113,16 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
                     <Mail size={18} />
                   </div>
                   <input
-                    {...register('email', {
-                        required: "Email is required"
+                    {...register("email", {
+                      required: "Email is required",
                     })}
                     placeholder="name@example.com"
                     className="w-full pl-11 pr-4 py-3.5 bg-slate-50/80 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all duration-200"
                   />
                 </div>
-                {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
               </div>
 
               {/* Password Input Field */}
@@ -128,12 +137,12 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
                     <Lock size={18} />
                   </div>
                   <input
-                    {...register('password', {
-                        required: "Password is required",
-                        minLength:{
-                            value:6,
-                            message:"Minimum 6 Characters"
-                        }
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Minimum 6 Characters",
+                      },
                     })}
                     placeholder="••••••••••••"
                     className="w-full pl-11 pr-12 py-3.5 bg-slate-50/80 border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all duration-200"
@@ -166,12 +175,14 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
             </form>
 
             {/* Social Authentication Divider */}
-            
           </div>
 
           {/* Footer Signup Prompt */}
           <div className="mt-8 text-center sm:text-left pt-6 border-t border-slate-100">
-            <button onClick={() => navigate("/register")} className="text-xs font-medium text-slate-500">
+            <button
+              onClick={() => navigate("/register")}
+              className="text-xs font-medium text-slate-500"
+            >
               New to Mart?{" "}
               <a
                 href="#signup"
@@ -182,14 +193,12 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
               </a>
             </button>
           </div>
-
         </div>
 
         {/* ==========================================================================
            RIGHT COLUMN: BRAND VISUAL & BENEFIT BANNER
            ========================================================================== */}
         <div className="lg:col-span-5 bg-slate-900 p-8 sm:p-12 text-white flex flex-col justify-between relative overflow-hidden">
-          
           {/* Decorative Ambient Background Elements */}
           <div className="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-orange-600/20 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -206,10 +215,12 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
           <div className="relative z-10 my-12 space-y-6">
             <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
               Curated items. <br />
-              <span className="text-orange-500">Lightning-fast</span> fulfillment.
+              <span className="text-orange-500">Lightning-fast</span>{" "}
+              fulfillment.
             </h3>
             <p className="text-xs sm:text-sm font-medium text-slate-400 leading-relaxed">
-              Log in to manage your orders, save items to your wishlist, and experience a streamlined checkout process.
+              Log in to manage your orders, save items to your wishlist, and
+              experience a streamlined checkout process.
             </p>
 
             {/* Feature Badges */}
@@ -219,8 +230,12 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
                   <Truck size={16} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-white">Free Express Shipping</h4>
-                  <p className="text-[11px] text-slate-400">On all orders over $50</p>
+                  <h4 className="text-xs font-bold text-white">
+                    Free Express Shipping
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    On all orders over $50
+                  </p>
                 </div>
               </div>
 
@@ -229,8 +244,12 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
                   <ShieldCheck size={16} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-white">Encrypted Transactions</h4>
-                  <p className="text-[11px] text-slate-400">256-bit bank-level security</p>
+                  <h4 className="text-xs font-bold text-white">
+                    Encrypted Transactions
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    256-bit bank-level security
+                  </p>
                 </div>
               </div>
             </div>
@@ -241,9 +260,7 @@ let {register, handleSubmit, reset, formState:{errors}} = useForm()
             <CheckCircle2 size={15} className="text-emerald-500" />
             <span>Trusted by over 50,000 shoppers worldwide</span>
           </div>
-
         </div>
-
       </div>
     </div>
   );

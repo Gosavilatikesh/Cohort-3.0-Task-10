@@ -13,9 +13,8 @@ const App = () => {
 
   return (
     <div>
-      {/* <Navbar />
-      <AppRoutes /> */}
-      <RegisterPage />
+      <Navbar />
+      <AppRoutes />
     </div>
   )
 }

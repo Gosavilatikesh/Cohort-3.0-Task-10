@@ -1,20 +1,25 @@
 import React, { useContext } from "react";
 import { Navigate, NavLink, useNavigate } from "react-router";
-import { ShoppingCart, LogOut } from "lucide-react";
+import { ShoppingCart, LogOut, ShoppingBag } from "lucide-react";
 import { toast } from "react-toastify";
 import { Auth } from "../context/AuthContext";
 
-const Navbar = ({ onLogout }) => {
-
+const Navbar = ({ onLogout, cartItem = [] }) => {
   const { setLogedInUser } = useContext(Auth);
   const navigate = useNavigate();
+
+  // Calculate total quantity across all items in the cart
+  const totalCartCount = cartItem.reduce(
+    (acc, item) => acc + (item.quantity || 1),
+    0
+  );
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-lg bg-white/70 border-b border-orange-100">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-3">
-          <div className="h-12 w-12 rounded-2xl bg-linear-to-r from-orange-500 to-amber-400 flex items-center justify-center shadow-lg">
+          <div className="h-12 w-12 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center shadow-lg">
             <ShoppingCart className="text-white" size={22} />
           </div>
 
@@ -60,8 +65,23 @@ const Navbar = ({ onLogout }) => {
           </NavLink>
         </nav>
 
-        {/* Profile & Logout Actions */}
+        {/* Profile, Cart & Logout Actions */}
         <div className="flex items-center gap-4">
+          {/* Cart Icon & Quantity Badge */}
+          <NavLink
+            to="/cart"
+            className="relative p-2.5 rounded-xl text-slate-700 hover:text-orange-500 hover:bg-orange-50 transition-all flex items-center justify-center"
+            aria-label="View Cart"
+          >
+            <ShoppingBag size={22} />
+            {totalCartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[10px] font-bold h-5 min-w-[20px] px-1 rounded-full flex items-center justify-center border-2 border-white animate-pulse">
+                {totalCartCount > 99 ? "99+" : totalCartCount}
+              </span>
+            )}
+          </NavLink>
+
+          {/* Profile Badge */}
           <div className="flex items-center gap-3">
             <div className="h-11 w-11 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shadow-md shadow-orange-500/20">
               L

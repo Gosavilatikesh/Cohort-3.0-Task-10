@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router"; // 1. IMPORT LINK HERE
 import {
   ShoppingCart,
   Star,
@@ -25,7 +26,8 @@ const CartSidebar = ({ isOpen, onClose, cartItem = [], setCartItem }) => {
   // Handle adjustments from the plus and minus stepper actions
   const handleQuantityAdjustment = (id, delta) => {
     setCartItem((prev) =>
-      prev.map((item) => {
+      prev
+        .map((item) => {
           if (item.id === id) {
             const updatedQty = item.quantity + delta;
             return {
@@ -41,8 +43,6 @@ const CartSidebar = ({ isOpen, onClose, cartItem = [], setCartItem }) => {
   };
 
   // Handle immediate deletion via the trash icon
-
-
   const handleRemoveItem = (id) => {
     setCartItem((prev) => prev.filter((item) => item.id !== id));
   };
@@ -191,6 +191,7 @@ const ProductCard = ({ product, setCartItem, cartItem }) => {
   if (!product) return null;
 
   const {
+    id, // Ensure id is destructured
     title,
     category,
     description,
@@ -214,8 +215,11 @@ const ProductCard = ({ product, setCartItem, cartItem }) => {
   return (
     <>
       <div className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-orange-200">
-        {/* Visual Workspace: Image and dynamic state tags */}
-        <div className="relative aspect-square w-full overflow-hidden bg-slate-50">
+        
+        {/* ============================================================== */}
+        {/* WRAP ITEM 1: THE IMAGE CONTAINER WITH <Link>                   */}
+        {/* ============================================================== */}
+        <Link to={`/main/shop/${id}`} className="relative aspect-square w-full overflow-hidden bg-slate-50 block cursor-pointer">
           <img
             src={displayImage}
             alt={title}
@@ -244,7 +248,7 @@ const ProductCard = ({ product, setCartItem, cartItem }) => {
               </>
             )}
           </div>
-        </div>
+        </Link>
 
         {/* Content Workspace */}
         <div className="flex flex-1 flex-col p-6">
@@ -257,9 +261,14 @@ const ProductCard = ({ product, setCartItem, cartItem }) => {
 
           {/* Title and Rating Array */}
           <div className="space-y-1.5">
-            <h3 className="text-lg font-extrabold text-slate-900 tracking-tight line-clamp-1 group-hover:text-orange-600 transition-colors">
-              {title}
-            </h3>
+            {/* ============================================================== */}
+            {/* WRAP ITEM 2: THE TITLE WITH <Link>                            */}
+            {/* ============================================================== */}
+            <Link to={`/main/shop/${id}`}>
+              <h3 className="text-lg font-extrabold text-slate-900 tracking-tight line-clamp-1 hover:text-orange-600 transition-colors cursor-pointer">
+                {title}
+              </h3>
+            </Link>
 
             {/* Star System */}
             <div className="flex items-center gap-1">
